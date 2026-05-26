@@ -55,6 +55,7 @@
     --c-mint: #61E4C5;
     --c-blue: #1947E5;
     --c-lilac: #E9E7FC;
+    --danger: #B23B17;
   }
   *, *::before, *::after { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; }
@@ -244,6 +245,20 @@
 
   /* Hero highlight */
   .hl { background: var(--c-yellow); padding: 0 6px; border-radius: 4px; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+
+  /* Accessible keyboard focus indicator */
+  :focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+  .nian-input:focus-visible { outline-color: var(--accent); }
+
+  /* Respect users who prefer reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
 </style>
 </head>
 <body>

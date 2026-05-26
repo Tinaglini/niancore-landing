@@ -210,14 +210,14 @@ const COPY = {
 // ──────────────────────────────────────────────────────────────────
 // Icons
 // ──────────────────────────────────────────────────────────────────
-const Arrow = (p) => <svg viewBox="0 0 24 24" width={p.size || 20} height={p.size || 20} fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="13 6 19 12 13 18" /></svg>;
-const Check = (p) => <svg viewBox="0 0 24 24" width={p.size || 14} height={p.size || 14} fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>;
-const Bolt = (p) => <svg viewBox="0 0 24 24" width={p.size || 26} height={p.size || 26} fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" /></svg>;
-const Flame = (p) => <svg viewBox="0 0 24 24" width={p.size || 26} height={p.size || 26} fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2s4 4 4 8a4 4 0 0 1-4 4 4 4 0 0 1-4-4c0-1 0-2 1-3 0 3 2 4 3 4-2-3 0-7 0-9z" /><path d="M5 14a7 7 0 1 0 14 0c0 5-3 8-7 8s-7-3-7-8z" /></svg>;
-const Skull = (p) => <svg viewBox="0 0 24 24" width={p.size || 26} height={p.size || 26} fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2a8 8 0 0 0-8 8v4l2 2v3h4v-2h4v2h4v-3l2-2v-4a8 8 0 0 0-8-8z" /><circle cx="9" cy="11" r="1.2" fill="currentColor" /><circle cx="15" cy="11" r="1.2" fill="currentColor" /></svg>;
-const Pixel = (p) => <svg viewBox="0 0 24 24" width={p.size || 26} height={p.size || 26} fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinejoin="round"><rect x="3" y="3" width="6" height="6" /><rect x="15" y="3" width="6" height="6" /><rect x="3" y="15" width="6" height="6" /><rect x="15" y="15" width="6" height="6" /><rect x="9" y="9" width="6" height="6" /></svg>;
-const Sparkle = (p) => <svg viewBox="0 0 24 24" width={p.size || 16} height={p.size || 16} fill="currentColor"><path d="M12 2l1.6 6.4L20 10l-6.4 1.6L12 18l-1.6-6.4L4 10l6.4-1.6L12 2z" /></svg>;
-const Globe = (p) => <svg viewBox="0 0 24 24" width={p.size || 16} height={p.size || 16} fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="9" /><path d="M3 12h18" /><path d="M12 3a13 13 0 0 1 0 18a13 13 0 0 1 0-18z" /></svg>;
+const Arrow = (p) => <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width={p.size || 20} height={p.size || 20} fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12" /><polyline points="13 6 19 12 13 18" /></svg>;
+const Check = (p) => <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width={p.size || 14} height={p.size || 14} fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>;
+const Bolt = (p) => <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width={p.size || 26} height={p.size || 26} fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" /></svg>;
+const Flame = (p) => <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width={p.size || 26} height={p.size || 26} fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2s4 4 4 8a4 4 0 0 1-4 4 4 4 0 0 1-4-4c0-1 0-2 1-3 0 3 2 4 3 4-2-3 0-7 0-9z" /><path d="M5 14a7 7 0 1 0 14 0c0 5-3 8-7 8s-7-3-7-8z" /></svg>;
+const Skull = (p) => <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width={p.size || 26} height={p.size || 26} fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round"><path d="M12 2a8 8 0 0 0-8 8v4l2 2v3h4v-2h4v2h4v-3l2-2v-4a8 8 0 0 0-8-8z" /><circle cx="9" cy="11" r="1.2" fill="currentColor" /><circle cx="15" cy="11" r="1.2" fill="currentColor" /></svg>;
+const Pixel = (p) => <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width={p.size || 26} height={p.size || 26} fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinejoin="round"><rect x="3" y="3" width="6" height="6" /><rect x="15" y="3" width="6" height="6" /><rect x="3" y="15" width="6" height="6" /><rect x="15" y="15" width="6" height="6" /><rect x="9" y="9" width="6" height="6" /></svg>;
+const Sparkle = (p) => <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width={p.size || 16} height={p.size || 16} fill="currentColor"><path d="M12 2l1.6 6.4L20 10l-6.4 1.6L12 18l-1.6-6.4L4 10l6.4-1.6L12 2z" /></svg>;
+const Globe = (p) => <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width={p.size || 16} height={p.size || 16} fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="9" /><path d="M3 12h18" /><path d="M12 3a13 13 0 0 1 0 18a13 13 0 0 1 0-18z" /></svg>;
 
 // ──────────────────────────────────────────────────────────────────
 // Language switcher (segmented control)
@@ -229,7 +229,7 @@ function LangSwitch({ lang, setLang }) {
     { code: "es", label: "ES" }
   ];
   return (
-    <div style={{
+    <div role="group" aria-label="Selecionar idioma / Select language" style={{
       display: "inline-flex", alignItems: "center", gap: 4,
       padding: 4, background: "var(--card)",
       border: "2px solid var(--line)", borderRadius: 999,
@@ -278,7 +278,7 @@ function EmailForm({ t, ctaLabel, compact = false, onSubmit }) {
 
   if (state === "sent") {
     return (
-      <div className="nb" style={{ padding: 22, display: "flex", alignItems: "center", gap: 14, background: "var(--c-mint)" }}>
+      <div className="nb" role="status" style={{ padding: 22, display: "flex", alignItems: "center", gap: 14, background: "var(--c-mint)" }}>
         <div style={{ width: 36, height: 36, borderRadius: 999, border: "2.5px solid var(--line)", display: "grid", placeItems: "center", background: "var(--card)" }}>
           <Check size={18} />
         </div>
@@ -307,7 +307,7 @@ function EmailForm({ t, ctaLabel, compact = false, onSubmit }) {
         </button>
       </div>
       {state === "error" &&
-      <div style={{ marginTop: 10, fontSize: 13, fontWeight: 600, color: "var(--c-orange)" }}>{err}</div>
+      <div role="alert" style={{ marginTop: 10, fontSize: 13, fontWeight: 600, color: "var(--danger)" }}>{err}</div>
       }
       {!compact &&
       <div style={{ marginTop: 14, fontSize: 13, color: "var(--muted)", display: "flex", alignItems: "center", gap: 8 }}>
@@ -372,6 +372,9 @@ function Hero({ t, onSubmit, lang, setLang }) {
 function DeckMockup({ t }) {
   const [flipped, setFlipped] = useState(false);
   useEffect(() => {
+    // Don't auto-animate the card for users who prefer reduced motion.
+    const reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) return;
     const id = setInterval(() => setFlipped((f) => !f), 3200);
     return () => clearInterval(id);
   }, []);
@@ -438,7 +441,7 @@ function DeckMockup({ t }) {
         <Flame size={18} />
         <div>
           <div style={{ fontWeight: 800, fontSize: 16, lineHeight: 1 }}>{t.streak_n}</div>
-          <div style={{ fontSize: 10, opacity: 0.85, fontWeight: 600 }}>{t.streak_label}</div>
+          <div style={{ fontSize: 10, color: "#DCE3FB", fontWeight: 600 }}>{t.streak_label}</div>
         </div>
       </div>
     </div>);
@@ -597,7 +600,7 @@ function Prova({ t }) {
           <article key={i} className="nb stat-card nb-press" style={{ background: colors[i] }}>
               <div className="stat-num">{s.big}</div>
               <p style={{ fontSize: 16, fontWeight: 700, marginTop: 14, lineHeight: 1.35, maxWidth: 280 }}>{s.label}</p>
-              <p style={{ fontSize: 12, color: "rgba(24,25,31,0.65)", marginTop: 10, fontWeight: 600, fontFamily: "JetBrains Mono" }}>{s.sub}</p>
+              <p style={{ fontSize: 12, color: "rgba(24,25,31,0.82)", marginTop: 10, fontWeight: 600, fontFamily: "JetBrains Mono" }}>{s.sub}</p>
             </article>
           )}
         </div>
@@ -643,7 +646,7 @@ function CTA({ t, onSubmit }) {
 function Marquee({ t }) {
   const row = [...t.marquee, ...t.marquee];
   return (
-    <div className="marquee">
+    <div className="marquee" aria-hidden="true">
       <div className="marquee-track">
         {row.map((m, i) => <span key={i}>{m} <span className="sep"></span></span>)}
       </div>
@@ -715,15 +718,17 @@ function App() {
 
   return (
     <>
-      <Hero t={t} onSubmit={onSubmit} lang={lang} setLang={setLang} />
-      <Marquee t={t} />
-      <Dores t={t} />
-      <Como t={t} />
-      <Prova t={t} />
-      <CTA t={t} onSubmit={onSubmit} />
+      <main>
+        <Hero t={t} onSubmit={onSubmit} lang={lang} setLang={setLang} />
+        <Marquee t={t} />
+        <Dores t={t} />
+        <Como t={t} />
+        <Prova t={t} />
+        <CTA t={t} onSubmit={onSubmit} />
+      </main>
       <Footer />
 
-      {toast && <div className="toast">{toast}</div>}
+      {toast && <div className="toast" role="status" aria-live="polite">{toast}</div>}
     </>);
 }
 
