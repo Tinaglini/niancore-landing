@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Nian — flashcards sem a interface dos anos 90</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+<style id="__theme">
+  :root {
+    /* defaults overwritten by Tweaks */
+    --bg: #FBF6EB;
+    --ink: #18191F;
+    --muted: #6B6C75;
+    --card: #FFFFFF;
+    --line: #18191F;
+    --shadow: #18191F;
+    --accent: #1947E5;
+    --accent-ink: #FFFFFF;
+    --c-pink: #FFC7DE;
+    --c-yellow: #FFBD12;
+    --c-orange: #F95A2C;
+    --c-mint: #61E4C5;
+    --c-blue: #1947E5;
+    --c-lilac: #E9E7FC;
+  }
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: 'Montserrat', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "ss01", "cv11";
+  }
+  ::selection { background: var(--ink); color: var(--bg); }
+
+  .mono { font-family: 'JetBrains Mono', ui-monospace, monospace; }
+
+  /* Hard-offset neobrutalist shadow */
+  .nb {
+    border: 2.5px solid var(--line);
+    box-shadow: 5px 5px 0 0 var(--shadow);
+    background: var(--card);
+    border-radius: 18px;
+  }
+  .nb-sm { border: 2px solid var(--line); box-shadow: 3px 3px 0 0 var(--shadow); border-radius: 12px; }
+  .nb-lg { border: 3px solid var(--line); box-shadow: 7px 7px 0 0 var(--shadow); border-radius: 24px; }
+
+  /* Press effect */
+  .nb-press { transition: transform 90ms ease, box-shadow 90ms ease; }
+  .nb-press:hover { transform: translate(-1px,-1px); box-shadow: 6px 6px 0 0 var(--shadow); }
+  .nb-press:active { transform: translate(3px,3px); box-shadow: 2px 2px 0 0 var(--shadow); }
+
+  /* Layout container */
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 28px; }
+
+  /* Section labels */
+  .section-tag {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 12px; font-weight: 700; letter-spacing: 0.18em;
+    text-transform: uppercase; padding: 8px 14px;
+    border: 2px solid var(--line); border-radius: 44px;
+    background: var(--card);
+    box-shadow: 2px 2px 0 0 var(--shadow);
+  }
+  .section-tag .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); border: 1.5px solid var(--line); }
+
+  /* Type */
+  h1, h2, h3, h4 { margin: 0; font-weight: 800; letter-spacing: -0.02em; text-wrap: balance; }
+  h1 { font-size: clamp(36px, 6vw, 76px); font-weight: 900; line-height: 0.98; letter-spacing: -0.035em; }
+  h2 { font-size: clamp(28px, 4vw, 48px); line-height: 1.02; letter-spacing: -0.025em; }
+  h3 { font-size: 22px; line-height: 1.15; }
+  p  { margin: 0; line-height: 1.5; }
+
+  /* Form */
+  .nian-input {
+    appearance: none; width: 100%; font: inherit;
+    font-weight: 600; font-size: 17px;
+    background: var(--card); color: var(--ink);
+    padding: 18px 20px;
+    border: 2.5px solid var(--line);
+    border-radius: 14px;
+    outline: none;
+    box-shadow: 4px 4px 0 0 var(--shadow);
+    transition: box-shadow 90ms ease, transform 90ms ease;
+  }
+  .nian-input::placeholder { color: var(--muted); font-weight: 500; }
+  .nian-input:focus { box-shadow: 6px 6px 0 0 var(--accent); transform: translate(-1px,-1px); }
+  .nian-btn {
+    appearance: none; cursor: pointer; font: inherit;
+    font-weight: 700; font-size: 17px;
+    background: var(--accent); color: var(--accent-ink);
+    padding: 18px 26px;
+    border: 2.5px solid var(--line);
+    border-radius: 14px;
+    box-shadow: 4px 4px 0 0 var(--shadow);
+    transition: transform 90ms ease, box-shadow 90ms ease;
+    display: inline-flex; align-items: center; gap: 10px;
+    white-space: nowrap;
+  }
+  .nian-btn:hover { transform: translate(-1px,-1px); box-shadow: 5px 5px 0 0 var(--shadow); }
+  .nian-btn:active { transform: translate(3px,3px); box-shadow: 1px 1px 0 0 var(--shadow); }
+
+  /* Diagonal stripe pattern background */
+  .stripes {
+    background-image:
+      repeating-linear-gradient(135deg,
+        transparent 0 10px,
+        color-mix(in oklab, var(--ink) 8%, transparent) 10px 11px);
+  }
+
+  /* Tape sticker */
+  .tape {
+    position: absolute; width: 70px; height: 22px;
+    background: color-mix(in oklab, var(--c-yellow) 90%, transparent);
+    border: 1.5px solid var(--line);
+    transform: rotate(-6deg);
+    opacity: 0.95;
+  }
+
+  /* Marquee */
+  @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+  .marquee-track { display: inline-flex; gap: 48px; animation: marquee 38s linear infinite; padding-right: 48px; }
+  .marquee { overflow: hidden; border-top: 2px solid var(--line); border-bottom: 2px solid var(--line); padding: 14px 0; background: var(--c-yellow); white-space: nowrap; }
+  .marquee span { font-weight: 800; letter-spacing: 0.04em; text-transform: uppercase; font-size: 14px; display: inline-flex; align-items: center; gap: 48px; }
+  .marquee .sep { width: 10px; height: 10px; background: var(--ink); border-radius: 50%; display: inline-block; }
+
+  /* Footer disclaimer checkbox style */
+  .check {
+    width: 18px; height: 18px; border: 2px solid var(--line); border-radius: 4px;
+    display: inline-flex; align-items: center; justify-content: center; flex: none;
+    background: var(--card);
+  }
+  .check svg { width: 12px; height: 12px; }
+
+  /* Step number bubble */
+  .step-num {
+    width: 56px; height: 56px; border-radius: 50%;
+    background: var(--accent); color: var(--accent-ink);
+    border: 2.5px solid var(--line); box-shadow: 3px 3px 0 0 var(--shadow);
+    display: grid; place-items: center;
+    font-family: 'Montserrat'; font-weight: 800; font-size: 24px;
+    flex: none;
+  }
+
+  /* Card variants */
+  .pain-card { padding: 28px; display: flex; flex-direction: column; gap: 18px; min-height: 260px; }
+  .pain-icon {
+    width: 56px; height: 56px; border: 2.5px solid var(--line); border-radius: 12px;
+    box-shadow: 3px 3px 0 0 var(--shadow);
+    display: grid; place-items: center;
+  }
+
+  .stat-card { padding: 32px 28px; text-align: left; }
+  .stat-num { font-size: clamp(56px, 8vw, 96px); font-weight: 900; letter-spacing: -0.04em; line-height: 0.9; font-variant-numeric: tabular-nums; }
+
+  /* Hero deck mock */
+  .deck-mock { position: relative; }
+  .deck-card {
+    position: absolute; width: 100%; height: 100%;
+    background: var(--card); border: 2.5px solid var(--line);
+    box-shadow: 6px 6px 0 0 var(--shadow);
+    border-radius: 18px;
+    display: flex; flex-direction: column;
+    padding: 20px;
+  }
+
+  /* Logo wordmark */
+  .wordmark {
+    font-weight: 900; letter-spacing: -0.04em; font-size: 28px;
+    display: inline-flex; align-items: center; gap: 10px;
+  }
+  .wordmark .mark {
+    width: 32px; height: 32px; border-radius: 8px;
+    background: var(--accent); border: 2.5px solid var(--line);
+    box-shadow: 2px 2px 0 0 var(--shadow);
+    display: grid; place-items: center;
+    color: var(--accent-ink); font-weight: 900; font-size: 18px;
+  }
+
+  /* Toast on submit */
+  .toast {
+    position: fixed; left: 50%; bottom: 28px; transform: translateX(-50%);
+    background: var(--ink); color: var(--bg);
+    border: 2.5px solid var(--line); border-radius: 12px;
+    padding: 14px 20px; font-weight: 700;
+    box-shadow: 4px 4px 0 0 var(--c-yellow);
+    z-index: 60;
+  }
+
+  /* Responsive grid */
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+  .grid-2 { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 40px; align-items: center; }
+  @media (max-width: 880px) {
+    .grid-3 { grid-template-columns: 1fr; }
+    .grid-2 { grid-template-columns: 1fr; gap: 30px; }
+    .hide-mobile { display: none !important; }
+  }
+
+  /* Misc */
+  hr.rule { border: 0; border-top: 2px dashed color-mix(in oklab, var(--ink) 25%, transparent); margin: 0; }
+
+  /* Pill cluster of "as seen in" research labels */
+  .pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    border: 1.5px solid var(--line); border-radius: 44px;
+    padding: 6px 12px; font-size: 12px; font-weight: 700;
+    background: var(--card);
+  }
+
+  /* Hero highlight */
+  .hl { background: var(--c-yellow); padding: 0 6px; border-radius: 4px; box-decoration-break: clone; -webkit-box-decoration-break: clone; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel" src="app.jsx"></script>
+</body>
+</html>
