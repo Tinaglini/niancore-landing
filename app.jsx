@@ -677,11 +677,35 @@ function App() {
   useEffect(() => {
     try { localStorage.setItem("nian-lang", lang); } catch {}
     document.documentElement.lang = lang === "pt" ? "pt-BR" : lang;
-    document.title = t.hero_h1_hl
-      ? (lang === "en" ? "Nian — flashcards without the 90s interface"
-        : lang === "es" ? "Nian — flashcards sin la interfaz de los 90"
-        : "Nian — flashcards sem a interface dos anos 90")
-      : "Nian";
+
+    // Keep title and SEO/social meta tags in sync with the active language.
+    const metaByLang = {
+      pt: {
+        title: "Nian — flashcards sem a interface dos anos 90",
+        desc: "Flashcards com repetição espaçada, sem a interface dos anos 90 e sem te punir por faltar um dia. Importa do Anki em 30s."
+      },
+      en: {
+        title: "Nian — flashcards without the 90s interface",
+        desc: "Spaced repetition flashcards, without the 90s interface and without punishing you for missing a day. Imports from Anki in 30s."
+      },
+      es: {
+        title: "Nian — flashcards sin la interfaz de los 90",
+        desc: "Flashcards con repetición espaciada, sin la interfaz de los 90 y sin castigarte por faltar un día. Importa desde Anki en 30s."
+      }
+    };
+    const meta = metaByLang[lang] || metaByLang.pt;
+
+    document.title = meta.title;
+
+    const setMeta = (selector, value) => {
+      const el = document.head.querySelector(selector);
+      if (el && value) el.setAttribute("content", value);
+    };
+    setMeta('meta[name="description"]', meta.desc);
+    setMeta('meta[property="og:title"]', meta.title);
+    setMeta('meta[property="og:description"]', meta.desc);
+    setMeta('meta[name="twitter:title"]', meta.title);
+    setMeta('meta[name="twitter:description"]', meta.desc);
   }, [lang]);
 
   const onSubmit = (email) => {
