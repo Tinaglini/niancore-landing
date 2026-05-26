@@ -5,7 +5,7 @@ const { useState, useEffect, useRef } = React;
 // ──────────────────────────────────────────────────────────────────
 const COPY = {
   pt: {
-    nav_badge: "Acesso antecipado · Fev/2026",
+    nav_badge: "Acesso antecipado · Jul/2026",
     hero_tag: "Para quem desistiu do Anki",
     hero_h1_a: "Você abriu o Anki, viu",
     hero_h1_hl: "650 cards",
@@ -72,7 +72,7 @@ const COPY = {
     toast_added: "adicionado à fila."
   },
   en: {
-    nav_badge: "Early access · Feb/2026",
+    nav_badge: "Early access · Jul/2026",
     hero_tag: "For everyone who quit Anki",
     hero_h1_a: "You opened Anki, saw",
     hero_h1_hl: "650 cards",
@@ -139,7 +139,7 @@ const COPY = {
     toast_added: "added to the waitlist."
   },
   es: {
-    nav_badge: "Acceso anticipado · Feb/2026",
+    nav_badge: "Acceso anticipado · Jul/2026",
     hero_tag: "Para quien dejó Anki",
     hero_h1_a: "Abriste Anki, viste",
     hero_h1_hl: "650 tarjetas",
