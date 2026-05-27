@@ -3,6 +3,6 @@
 // por isso pode ir versionada no git. Veja docs/SUPABASE_SETUP.md.
 // Troque pelos valores reais em: Supabase → Project Settings → API.
 window.NIAN_SUPABASE = {
-  url: "https://SEU_PROJETO.supabase.co",
-  anonKey: "SEU_ANON_KEY"
+  url: "https://vzxxrglihkuzguxjgpya.supabase.co",
+  anonKey: "sb_publishable_sLLkLVvj1w3y1uze94bH9w_r4qCH842"
 };
