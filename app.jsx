@@ -1,6 +1,28 @@
 const { useState, useEffect, useRef } = React;
 
 // ──────────────────────────────────────────────────────────────────
+// Supabase client (waitlist persistence)
+// ──────────────────────────────────────────────────────────────────
+const NIAN_SB = (typeof window !== "undefined" && window.NIAN_SUPABASE) || null;
+const sb = (NIAN_SB && NIAN_SB.url && NIAN_SB.url.indexOf("SEU_PROJETO") === -1 && window.supabase)
+  ? window.supabase.createClient(NIAN_SB.url, NIAN_SB.anonKey)
+  : null;
+
+// Saves a lead. Resolves on success AND on duplicate (Postgres 23505).
+// Throws on real errors so the form can show an error state.
+// If Supabase isn't configured yet, no-ops with a warning (cosmetic success).
+async function saveLead(email, lang) {
+  if (!sb) {
+    console.warn("[Nian] Supabase não configurado — inscrição não foi salva.");
+    return;
+  }
+  const { error } = await sb
+    .from("waitlist")
+    .insert({ email: email.trim().toLowerCase(), lang });
+  if (error && error.code !== "23505") throw error;
+}
+
+// ──────────────────────────────────────────────────────────────────
 // Copy (PT + EN + ES)
 // ──────────────────────────────────────────────────────────────────
 const COPY = {
@@ -22,6 +44,8 @@ const COPY = {
     form_sent_notify_a: "Avisamos no ",
     form_sent_notify_b: " quando abrir.",
     form_nospam: "Sem spam. Só avisamos quando abrir o acesso.",
+    form_sending: "Enviando…",
+    form_err_generic: "Algo deu errado. Tenta de novo em instantes.",
     card_subject: "Medicina · Cardio",
     card_q_label: "PERGUNTA",
     card_a_label: "RESPOSTA",
@@ -89,6 +113,8 @@ const COPY = {
     form_sent_notify_a: "We'll ping ",
     form_sent_notify_b: " when it opens.",
     form_nospam: "No spam. We only email when access opens.",
+    form_sending: "Sending…",
+    form_err_generic: "Something went wrong. Please try again in a moment.",
     card_subject: "Medicine · Cardio",
     card_q_label: "QUESTION",
     card_a_label: "ANSWER",
@@ -156,6 +182,8 @@ const COPY = {
     form_sent_notify_a: "Te avisamos a ",
     form_sent_notify_b: " cuando abra.",
     form_nospam: "Sin spam. Solo avisamos cuando se abra el acceso.",
+    form_sending: "Enviando…",
+    form_err_generic: "Algo salió mal. Inténtalo de nuevo en un momento.",
     card_subject: "Medicina · Cardio",
     card_q_label: "PREGUNTA",
     card_a_label: "RESPUESTA",
