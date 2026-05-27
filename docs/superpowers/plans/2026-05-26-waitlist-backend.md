@@ -23,7 +23,7 @@ $HOME/Library/Caches/ms-playwright/chromium_headless_shell-1217/chrome-headless-
 ```
 Local server for any headless check: `python3 -m http.server <port>` from the repo root.
 
-**One-time verification setup** (installs `playwright-core` so the `node -e` checks below can drive the cached browser). The checks run from the repo root and resolve the package via `NODE_PATH=/tmp/a11y/node_modules`:
+**One-time verification setup** (installs `playwright-core` so the `node -e` checks below can drive the cached browser). The local HTTP server is started from the repo root; the `node -e` check then `cd`s into `/tmp/a11y` so ESM `import("playwright-core")` resolves from its `node_modules` (NODE_PATH does **not** work for ESM imports):
 ```bash
 mkdir -p /tmp/a11y && (cd /tmp/a11y && npm init -y >/dev/null 2>&1 && npm i playwright-core >/dev/null 2>&1) && echo "ready"
 ```
@@ -259,7 +259,7 @@ Insert immediately after it:
 Run from repo root (uses `page.evaluate` to read JS globals):
 ```bash
 python3 -m http.server 8201 >/tmp/n.log 2>&1 & echo $! >/tmp/n.pid; sleep 1
-NODE_PATH=/tmp/a11y/node_modules node -e '
+cd /tmp/a11y && node -e '
 import("playwright-core").then(async ({chromium})=>{
   const EXEC=process.env.HOME+"/Library/Caches/ms-playwright/chromium_headless_shell-1217/chrome-headless-shell-mac-arm64/chrome-headless-shell";
   const b=await chromium.launch({executablePath:EXEC,headless:true,args:["--no-sandbox"]});
@@ -361,7 +361,7 @@ Replace with:
 With `config.js` still holding placeholders, `saveLead` no-ops, so a valid submit should reach the success state. Run from repo root:
 ```bash
 python3 -m http.server 8202 >/tmp/n.log 2>&1 & echo $! >/tmp/n.pid; sleep 1
-NODE_PATH=/tmp/a11y/node_modules node -e '
+cd /tmp/a11y && node -e '
 import("playwright-core").then(async ({chromium})=>{
   const EXEC=process.env.HOME+"/Library/Caches/ms-playwright/chromium_headless_shell-1217/chrome-headless-shell-mac-arm64/chrome-headless-shell";
   const b=await chromium.launch({executablePath:EXEC,headless:true,args:["--no-sandbox"]});
@@ -412,7 +412,7 @@ provided by the user.
 Serve locally and submit a unique email through the real client:
 ```bash
 python3 -m http.server 8203 >/tmp/n.log 2>&1 & echo $! >/tmp/n.pid; sleep 1
-NODE_PATH=/tmp/a11y/node_modules node -e '
+cd /tmp/a11y && node -e '
 import("playwright-core").then(async ({chromium})=>{
   const EXEC=process.env.HOME+"/Library/Caches/ms-playwright/chromium_headless_shell-1217/chrome-headless-shell-mac-arm64/chrome-headless-shell";
   const b=await chromium.launch({executablePath:EXEC,headless:true,args:["--no-sandbox"]});
