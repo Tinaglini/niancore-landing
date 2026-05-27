@@ -294,14 +294,20 @@ function EmailForm({ t, ctaLabel, compact = false, onSubmit }) {
   const [state, setState] = useState("idle");
   const [err, setErr] = useState("");
 
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault();
     const v = email.trim();
     if (!v) { setErr(t.form_err_empty); setState("error"); return; }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) { setErr(t.form_err_invalid); setState("error"); return; }
-    setState("sent");
     setErr("");
-    onSubmit?.(v);
+    setState("loading");
+    try {
+      await onSubmit?.(v);
+      setState("sent");
+    } catch (err) {
+      setErr(t.form_err_generic);
+      setState("error");
+    }
   };
 
   if (state === "sent") {
@@ -330,8 +336,9 @@ function EmailForm({ t, ctaLabel, compact = false, onSubmit }) {
             aria-label="email"
             autoComplete="email" />
         </div>
-        <button type="submit" className="nian-btn">
-          {ctaLabel} <Arrow size={20} />
+        <button type="submit" className="nian-btn" disabled={state === "loading"}
+          style={state === "loading" ? { opacity: 0.7, cursor: "wait" } : undefined}>
+          {state === "loading" ? t.form_sending : <>{ctaLabel} <Arrow size={20} /></>}
         </button>
       </div>
       {state === "error" &&
@@ -739,7 +746,8 @@ function App() {
     setMeta('meta[name="twitter:description"]', meta.desc);
   }, [lang]);
 
-  const onSubmit = (email) => {
+  const onSubmit = async (email) => {
+    await saveLead(email, lang);
     setToast(`✓ ${email} ${t.toast_added}`);
     setTimeout(() => setToast(null), 3200);
   };
