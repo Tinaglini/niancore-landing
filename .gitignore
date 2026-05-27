@@ -28,3 +28,6 @@ yarn-error.log*
 # OS
 .DS_Store
 Thumbs.db
+
+# Planning artifacts (specs & plans) — kept local, not versioned
+docs/superpowers/
