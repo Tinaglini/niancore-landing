@@ -289,20 +289,39 @@ function LangSwitch({ lang, setLang }) {
 // ──────────────────────────────────────────────────────────────────
 // Email form
 // ──────────────────────────────────────────────────────────────────
+// Anti-spam thresholds (client-side guards)
+const MIN_FILL_MS = 2000;   // submits faster than this = bot
+const COOLDOWN_MS = 60000;  // at most one signup per minute per browser
+
 function EmailForm({ t, ctaLabel, compact = false, onSubmit }) {
   const [email, setEmail] = useState("");
   const [state, setState] = useState("idle");
   const [err, setErr] = useState("");
+  const mountedAt = useRef(Date.now());
+  const honeyRef = useRef(null);
 
   const submit = async (e) => {
     e.preventDefault();
     const v = email.trim();
     if (!v) { setErr(t.form_err_empty); setState("error"); return; }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)) { setErr(t.form_err_invalid); setState("error"); return; }
+
+    // Anti-spam (silencioso): honeypot, time-trap e throttle local.
+    // Se disparar, mostra sucesso mas NÃO grava — não tipa o bot, não polui o banco.
+    const honeyFilled = honeyRef.current && honeyRef.current.value.trim() !== "";
+    const tooFast = Date.now() - mountedAt.current < MIN_FILL_MS;
+    let throttled = false;
+    try {
+      const last = Number(localStorage.getItem("nian-last-signup") || 0);
+      throttled = Date.now() - last < COOLDOWN_MS;
+    } catch {}
+    if (honeyFilled || tooFast || throttled) { setErr(""); setState("sent"); return; }
+
     setErr("");
     setState("loading");
     try {
       await onSubmit?.(v);
+      try { localStorage.setItem("nian-last-signup", String(Date.now())); } catch {}
       setState("sent");
     } catch (err) {
       setErr(t.form_err_generic);
@@ -325,6 +344,9 @@ function EmailForm({ t, ctaLabel, compact = false, onSubmit }) {
 
   return (
     <form onSubmit={submit} noValidate>
+      {/* Honeypot anti-spam: oculto para humanos, atrai bots. Fora do fluxo de teclado/leitor de tela. */}
+      <input ref={honeyRef} type="text" name="company" tabIndex={-1} autoComplete="off"
+        aria-hidden="true" style={{ position: "absolute", left: "-9999px", width: 1, height: 1, opacity: 0 }} />
       <div style={{ display: "flex", gap: 12, flexWrap: "wrap" }}>
         <div style={{ flex: "1 1 280px", position: "relative" }}>
           <input
